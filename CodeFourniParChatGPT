@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+
+// Modèle de données pour les clients, les demandes d'impression et les employés.
+class Client {
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
+}
+
+class Impression {
+    public int Id { get; set; }
+    public int ClientId { get; set; }
+    public string Nom { get; set; }
+    public string Description { get; set; }
+    public int Quantite { get; set; }
+    public DateTime DateDebut { get; set; }
+    public DateTime DateFin { get; set; }
+}
+
+class Employee {
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
+}
+
+// Fonction pour l'authentification des clients et des employés.
+class Authentification {
+    public static bool AuthentifierClient(List<Client> clients, string username, string password) {
+        foreach (var client in clients) {
+            if (client.Username == username && client.Password == password) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static bool AuthentifierEmployee(List<Employee> employees, string username, string password) {
+        foreach (var employee in employees) {
+            if (employee.Username == username && employee.Password == password) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+// Fonctions pour la création, la modification, la suppression et la consultation des demandes d'impression.
+class GestionImpression {
+    public static void CreerImpression(List<Impression> impressions, int clientId, string nom, string description, int quantite, DateTime dateDebut, DateTime dateFin) {
+        impressions.Add(new Impression {
+            Id = impressions.Count + 1,
+            ClientId = clientId,
+            Nom = nom,
+            Description = description,
+            Quantite = quantite,
+            DateDebut = dateDebut,
+            DateFin = dateFin
+        });
+    }
+
+    public static void ModifierImpression(List<Impression> impressions, int impressionId, string nom, string description, int quantite, DateTime dateDebut, DateTime dateFin) {
+        var impression = impressions.Find(i => i.Id == impressionId);
+        if (impression != null) {
+            impression.Nom = nom;
+            impression.Description = description;
+            impression.Quantite = quantite;
+            impression.DateDebut = dateDebut;
+            impression.DateFin = date
